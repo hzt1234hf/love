@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器</title>
+</head>
+<script src="js/jquery-3.6.0.min.js"></script>
+<link href="css/common.css" rel="stylesheet" type="text/css"/>
+
+<body style="text-align:center;">
+<div style="display: flow;width:320px;margin:40px auto">
+    <button type="button" class="btn_base btn" id="openall">全开</button>
+    <button type="button" class="btn_base btn" id="closeall">全关</button>
+</div>
+<div style="display: flow;width:170px;margin:20px auto" id="btns">
+    <button type="button" class="btn_base ctl_btn" id="stars">星星灯</button>
+    <button type="button" class="btn_base ctl_btn" id="rainbow">彩虹灯</button>
+    <button type="button" class="btn_base ctl_btn" id="heart">心形灯</button>
+    <button type="button" class="btn_base ctl_btn" id="love">love灯</button>
+    <button type="button" class="btn_base ctl_btn" id="iloveu">I ❤ U灯</button>
+    <button type="button" class="btn_base ctl_btn" id="ball">棉球形灯</button>
+    <button type="button" class="btn_base ctl_btn" id="projection">投影灯</button>
+    <button type="button" class="btn_base ctl_btn" id="photo">照片灯</button>
+</div>
+</body>
+</html>
+<script type="application/javascript">
+
+    $(".ctl_btn").click(function () {
+        objid = this.id
+        $.ajax({
+            url: "http://192.168.50.93:5000/switch/" + this.id + "/2",
+            success: function (result) {
+                if (result === "1") {
+                    $("#" + objid).css("background-color", "#90ff95");
+                } else if (result === "0") {
+                    $("#" + objid).css("background-color", "#ff9794");
+                }
+            },
+        });
+    });
+
+    $("#openall").click(function () {
+        $("#btns button").each(function (index) {
+            var id = this.id;
+            setTimeout(function () {
+                $.ajax({
+                    url: "http://192.168.50.93:5000/switch/" + id + "/1",
+                    success: function (result) {
+                        // console.log(id);
+                        if (result === "1") {
+                            $("#" + id).css("background-color", "#90ff95");
+                        } else if (result === "0") {
+                            $("#" + id).css("background-color", "#ff9794");
+                        }
+                    },
+                });
+            }, index * 750);
+
+
+        });
+    });
+
+    $("#closeall").click(function () {
+        $("#btns button").each(function (index) {
+            var id = this.id;
+            setTimeout(function () {
+                $.ajax({
+                    url: "http://192.168.50.93:5000/switch/" + id + "/0",
+                    success: function (result) {
+                        // console.log(id);
+                        if (result === "1") {
+                            $("#" + id).css("background-color", "#90ff95");
+                        } else if (result === "0") {
+                            $("#" + id).css("background-color", "#ff9794");
+                        }
+                    },
+                });
+            }, index * 750);
+        });
+    });
+</script>

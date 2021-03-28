@@ -1,0 +1,16 @@
+.btn_base{
+    width: 150px;
+    height: 50px;
+    font-size: 26px;
+    color: white;
+}
+
+.btn {
+    background-color: #fdff95;
+    color: black;
+}
+
+.ctl_btn {
+    margin: 10px auto;
+    background-color: #ff9794;
+}
